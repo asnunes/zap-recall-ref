@@ -1,64 +1,36 @@
-import { useMemo } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-import { Footer, Logo } from "./components";
-import { Flashcards } from "./components/Flashcards/Flashcard";
+import { Footer, Logo, Flashcards } from "./components";
+import { DECK, CARD_STATUS } from "./constants";
 
 export default function App() {
-  const cards = useMemo(() => {
-    const cardCopy = [...deck];
+  const [cards, setCards] = useState(() => {
+    const cardCopy = [...DECK];
     const shuffledCards = cardCopy.sort(() => Math.random() - 0.5);
-    return shuffledCards.slice(0, 4);
+    return shuffledCards
+      .slice(0, 4)
+      .map((card) => ({ ...card, status: CARD_STATUS.UNSEEN }));
   }, []);
+
+  function onCardStatusChange(card, status) {
+    const newCards = cards.map((c) => {
+      if (c.id === card.id) {
+        return { ...c, status };
+      }
+      return c;
+    });
+    setCards(newCards);
+  }
 
   return (
     <ScreenContainer>
       <Logo />
-      <Flashcards cards={cards} />
+      <Flashcards cards={cards} onCardStatusChange={onCardStatusChange} />
       <Footer />
     </ScreenContainer>
   );
 }
-
-const deck = [
-  {
-    id: 1,
-    question: "O que é JSX?",
-    answer: "Uma extensão da linguagem JavaScript",
-  },
-  {
-    id: 2,
-    question: "O React é __",
-    answer: "Uma biblioteca JavaScript para construção de interfaces",
-  },
-  {
-    id: 3,
-    question: "Componentes devem iniciar com __",
-    answer: "Letra maiúscula",
-  },
-  { id: 4, question: "Podemos colocar __ dentro do JSX", answer: "expressões" },
-  {
-    id: 5,
-    question: "O ReactDOM nos ajuda __",
-    answer: "Interagindo com a DOM para colocar componentes React na mesma",
-  },
-  {
-    id: 6,
-    question: "Usamos o npm para __",
-    answer: "Gerenciar os pacotes necessários e suas dependências",
-  },
-  {
-    id: 7,
-    question: "Usamos props para __",
-    answer: "Passar diferentes informações para componentes",
-  },
-  {
-    id: 8,
-    question: "Usamos estado (state) para __",
-    answer:
-      "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente",
-  },
-];
 
 const ScreenContainer = styled.div`
   background-color: #fb6b6b;

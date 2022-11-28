@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { Flashcard } from "./components";
 
-export function Flashcards({ cards }) {
+export function Flashcards({ cards, onCardStatusChange }) {
   return (
     <FlashcardsContainer>
-      {cards.map((card) => (
-        <Flashcard key={card.id} card={card} />
+      {cards.map((card, index) => (
+        <Flashcard
+          key={card.id}
+          index={index}
+          card={card}
+          onStatusChange={onCardStatusChange}
+        />
       ))}
     </FlashcardsContainer>
   );
@@ -16,5 +21,7 @@ const FlashcardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+
+  width: 100%;
+  margin: 0 10px;
 `;
