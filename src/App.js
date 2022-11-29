@@ -27,7 +27,7 @@ export default function App() {
     <ScreenContainer>
       <Logo />
       <Flashcards cards={cards} onCardStatusChange={onCardStatusChange} />
-      <Footer />
+      <Footer cards={cards} />
     </ScreenContainer>
   );
 }

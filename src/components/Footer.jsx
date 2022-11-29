@@ -1,9 +1,25 @@
+import { useMemo } from "react";
 import styled from "styled-components";
+import { CARD_STATUS } from "../constants";
 
-export function Footer() {
+export function Footer({ cards }) {
+  const [numberOfAnsweredCards, numberOfCards] = useMemo(() => {
+    const answeredCards = cards.filter((c) =>
+      [
+        CARD_STATUS.ZAPPED,
+        CARD_STATUS.ALMOST_FORGOTTEN,
+        CARD_STATUS.FORGOTTEN,
+      ].includes(c.status)
+    );
+
+    return [answeredCards.length, cards.length];
+  }, [cards]);
+
   return (
     <FooterContainer>
-      <p>0/0 concluídos</p>
+      <p>
+        {numberOfAnsweredCards}/{numberOfCards} concluídos
+      </p>
     </FooterContainer>
   );
 }
@@ -23,4 +39,5 @@ const FooterContainer = styled.div`
   font-size: 18px;
   color: #333333;
   padding: 10px;
+  text-transform: uppercase;
 `;
