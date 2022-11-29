@@ -10,7 +10,7 @@ export default function App() {
     const shuffledCards = cardCopy.sort(() => Math.random() - 0.5);
     return shuffledCards
       .slice(0, 4)
-      .map((card) => ({ ...card, status: CARD_STATUS.UNSEEN }));
+      .map((card) => ({ ...card, status: CARD_STATUS.CLOSED }));
   }, []);
 
   function onCardStatusChange(card, status) {
