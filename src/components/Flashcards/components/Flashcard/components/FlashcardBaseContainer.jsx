@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const FlashcardBaseContainer = styled.div`
+export const FlashcardBaseContainer = styled.div.attrs({
+  "data-test": "flashcard",
+})`
   width: 100%;
   padding: 20px;
   border-radius: 10px;

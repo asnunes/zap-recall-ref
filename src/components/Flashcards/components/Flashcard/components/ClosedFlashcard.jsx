@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { FlashcardBaseContainer } from "./FlashcardBaseContainer";
+import { FlashcardText } from "./FlashcardText";
+
 import playImage from "../../../../../assets/img/seta_play.png";
 
 export function ClosedFlashcard({ card, index, onCardOpen }) {
   return (
     <ClosedFlashcardContainer>
-      <p>Pergunta {index + 1}</p>
+      <FlashcardText>Pergunta {index + 1}</FlashcardText>
       <img
         src={playImage}
         alt="open flashcard"
@@ -20,7 +22,7 @@ const ClosedFlashcardContainer = styled(FlashcardBaseContainer)`
   flex-direction: row;
   justify-content: space-between;
 
-  p {
+  ${FlashcardText} {
     font-family: "Recursive";
     font-style: normal;
     font-weight: 700;
