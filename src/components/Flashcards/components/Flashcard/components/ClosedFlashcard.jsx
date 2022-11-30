@@ -11,6 +11,7 @@ export function ClosedFlashcard({ card, index, onCardOpen }) {
       <img
         src={playImage}
         alt="open flashcard"
+        data-test="play-btn"
         onClick={() => onCardOpen(card)}
       />
     </ClosedFlashcardContainer>

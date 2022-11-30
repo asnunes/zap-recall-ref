@@ -16,7 +16,7 @@ export function Footer({ cards }) {
   }, [cards]);
 
   return (
-    <FooterContainer>
+    <FooterContainer data-test="footer">
       <p>
         {numberOfAnsweredCards}/{numberOfCards} concluídos
       </p>

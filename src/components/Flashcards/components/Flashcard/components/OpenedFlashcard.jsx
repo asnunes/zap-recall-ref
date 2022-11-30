@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { FlashcardBaseContainer } from "./FlashcardBaseContainer";
+import { FlashcardText } from "./FlashcardText";
+
 import flipImage from "../../../../../assets/img/seta_virar.png";
 
 export function OpenedFlashcard({ card, onCardFlip }) {
   return (
     <OpenedFlashcardContainer>
-      <p>{card.question}</p>
+      <FlashcardText>{card.question}</FlashcardText>
       <img
         src={flipImage}
         alt="flip flashcard"
