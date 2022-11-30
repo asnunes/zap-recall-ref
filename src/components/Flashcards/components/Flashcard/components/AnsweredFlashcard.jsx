@@ -1,45 +1,25 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 
+import { Icon } from "../../../../FlashcardIcon";
 import { FlashcardBaseContainer } from "./FlashcardBaseContainer";
 import { FlashcardText } from "./FlashcardText";
 
 import { CARD_STATUS } from "../../../../../constants";
-import imageRight from "../../../../../assets/img/icone_certo.png";
-import imagePartial from "../../../../../assets/img/icone_quase.png";
-import imageWrong from "../../../../../assets/img/icone_erro.png";
 
 export function AnsweredFlashcard({ card, index }) {
-  const cardData = useMemo(() => {
-    if (card.status === CARD_STATUS.ZAPPED)
-      return {
-        image: imageRight,
-        selector: "zap-icon",
-        color: "#2FBE34",
-      };
+  const cardColor = useMemo(() => {
+    if (card.status === CARD_STATUS.ZAPPED) return "#2FBE34";
 
-    if (card.status === CARD_STATUS.ALMOST_FORGOTTEN)
-      return {
-        image: imagePartial,
-        selector: "partial-icon",
-        color: "#FF922E",
-      };
+    if (card.status === CARD_STATUS.ALMOST_FORGOTTEN) return "#FF922E";
 
-    return {
-      image: imageWrong,
-      selector: "no-icon",
-      color: "#FF3030",
-    };
+    return "#FF3030";
   }, [card]);
 
   return (
-    <AnsweredFlashcardContainer color={cardData.color}>
+    <AnsweredFlashcardContainer color={cardColor}>
       <FlashcardText>Pergunta {index + 1}</FlashcardText>
-      <img
-        data-test={cardData.selector}
-        src={cardData.image}
-        alt="answered flashcard"
-      />
+      <Icon cardStatus={card.status} />
     </AnsweredFlashcardContainer>
   );
 }

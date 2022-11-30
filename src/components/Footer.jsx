@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 import { CARD_STATUS } from "../constants";
+import { Icon } from "./FlashcardIcon";
 
 export function Footer({ cards }) {
   const [numberOfAnsweredCards, numberOfCards] = useMemo(() => {
@@ -17,9 +18,14 @@ export function Footer({ cards }) {
 
   return (
     <FooterContainer data-test="footer">
-      <p>
+      <FooterCounter>
         {numberOfAnsweredCards}/{numberOfCards} concluídos
-      </p>
+      </FooterCounter>
+      <FooterIcons>
+        {cards.map((card) => (
+          <Icon cardStatus={card.status} key={card.id} />
+        ))}
+      </FooterIcons>
     </FooterContainer>
   );
 }
@@ -40,4 +46,13 @@ const FooterContainer = styled.div`
   color: #333333;
   padding: 10px;
   text-transform: uppercase;
+`;
+
+const FooterCounter = styled.p``;
+
+const FooterIcons = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 5px;
 `;
