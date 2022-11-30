@@ -11,6 +11,7 @@ export function OpenedFlashcard({ card, onCardFlip }) {
       <img
         src={flipImage}
         alt="flip flashcard"
+        data-test="turn-btn"
         onClick={() => onCardFlip(card)}
       />
     </OpenedFlashcardContainer>

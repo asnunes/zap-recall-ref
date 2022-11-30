@@ -1,27 +1,31 @@
 import styled from "styled-components";
 import { FlashcardBaseContainer } from "./FlashcardBaseContainer";
+import { FlashcardText } from "./FlashcardText";
 import { CARD_STATUS } from "../../../../../constants";
 
 export function FlippedFlashcard({ card, onCardAnswer }) {
   return (
     <FlippedFlashcardContainer>
-      <p>{card.answer}</p>
+      <FlashcardText>{card.answer}</FlashcardText>
       <ActionButtonsContainer>
         <ActionButton
           onClick={() => onCardAnswer(card, CARD_STATUS.FORGOTTEN)}
           backgroundColor="#FF3030"
+          data-test="no-btn"
         >
           Não Lembrei
         </ActionButton>
         <ActionButton
           onClick={() => onCardAnswer(card, CARD_STATUS.ALMOST_FORGOTTEN)}
           backgroundColor="#FF922E"
+          data-test="partial-btn"
         >
           Quase Não Lembrei
         </ActionButton>
         <ActionButton
           onClick={() => onCardAnswer(card, CARD_STATUS.ZAPPED)}
           backgroundColor="#2FBE34"
+          data-test="zap-btn"
         >
           Zap!
         </ActionButton>

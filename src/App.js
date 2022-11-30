@@ -1,10 +1,16 @@
 import { useState } from "react";
-import styled from "styled-components";
 
-import { Footer, Logo, Flashcards } from "./components";
+import {
+  Footer,
+  Logo,
+  Flashcards,
+  ScreenContainer,
+  SplashScreen,
+} from "./components";
 import { DECK, CARD_STATUS } from "./constants";
 
 export default function App() {
+  const [didStart, setDidStart] = useState(false);
   const [cards, setCards] = useState(() => {
     const cardCopy = [...DECK];
     const shuffledCards = cardCopy.sort(() => Math.random() - 0.5);
@@ -23,7 +29,9 @@ export default function App() {
     setCards(newCards);
   }
 
-  return (
+  return !didStart ? (
+    <SplashScreen onStartClick={() => setDidStart(true)} />
+  ) : (
     <ScreenContainer>
       <Logo />
       <Flashcards cards={cards} onCardStatusChange={onCardStatusChange} />
@@ -31,15 +39,3 @@ export default function App() {
     </ScreenContainer>
   );
 }
-
-const ScreenContainer = styled.div`
-  background-color: #fb6b6b;
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0px;
-  padding: 0px;
-  padding-bottom: 200px;
-`;
