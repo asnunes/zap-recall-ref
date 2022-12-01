@@ -16,8 +16,25 @@ export function Footer({ cards }) {
     return [answeredCards.length, cards.length];
   }, [cards]);
 
+  const message = useMemo(() => {
+    if (numberOfAnsweredCards !== numberOfCards) {
+      return null;
+    }
+
+    const numberOfZappedCards = cards.filter(
+      (c) => c.status === CARD_STATUS.ZAPPED
+    ).length;
+
+    return numberOfZappedCards === numberOfCards
+      ? "Você não esqueceu de nenhum flashcard!"
+      : "Você esqueceu alguns flashcards, mas não se preocupe, você pode revisar eles mais tarde!";
+  }, [numberOfAnsweredCards, numberOfCards]);
+
   return (
     <FooterContainer data-test="footer">
+      {message && (
+        <FooterDoneMessage data-test="finish-text">{message}</FooterDoneMessage>
+      )}
       <FooterCounter>
         {numberOfAnsweredCards}/{numberOfCards} concluídos
       </FooterCounter>
@@ -40,6 +57,15 @@ const FooterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: "Recursive";
+  font-weight: 400;
+  font-size: 18px;
+  color: #333333;
+  padding: 10px;
+  text-transform: uppercase;
+`;
+
+const FooterDoneMessage = styled.div`
   font-family: "Recursive";
   font-weight: 400;
   font-size: 18px;
